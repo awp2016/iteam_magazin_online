@@ -1,0 +1,11 @@
+<h1> Shopping cart </h1>
+
+<table>
+{% for order in orders %}
+	<tr>
+		<td>Name: {{ order.Product }}</td>
+		<td>Quantity: {{order.quantity}}</td>
+		<td><a href="{% url 'remove-one-item' order.pk %}">Remove one item</a></td>
+	</tr>
+{% endfor %}
+</table>

@@ -90,3 +90,18 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = 'users'
+
+
+class Product(models.Model):
+	pass
+
+
+class ShoppingCart(models.Model):
+	user = models.OneToOneField(User,primary_key=True, related_name='cart')
+	products = models.ManyToManyField(Product, through='Order')
+
+
+class Order(models.Model):
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+	cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+	quantity = models.IntegerField(default=1)
