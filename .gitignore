@@ -4,3 +4,6 @@ static/*
 */static/*
 *.py[cod]
 *.pyc
+*/src/.idea/*
+src/.idea
+src/.idea/*

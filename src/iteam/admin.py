@@ -1,4 +1,5 @@
 from iteam.models import User
+from iteam.models import Product
 from django.contrib import admin
 
 
@@ -7,3 +8,4 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Product)

@@ -1,11 +1,31 @@
 from django.http import HttpResponse
 from django.views.generic.edit import UpdateView
 from django.shortcuts import redirect, render
+from django.views.generic.list import ListView
 
+from iteam.models import Order
 from . import models
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class ProductsListView(ListView):
+    model = models.Product
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductsListView, self).get_context_data(**kwargs)
+        products = self.model.objects.all()
+        context['products'] = products
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.order_by('-price')
+
+
+def product_details(request, pk):
+    product = models.Product.objects.get(pk=pk)
+    context = {
+        'product': product
+    }
+    return render(request, 'product_details.html', context)
 
 def shopping_cart(request, pk):
     cart = models.ShoppingCart.objects.get(pk=pk)

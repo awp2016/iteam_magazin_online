@@ -1,0 +1,14 @@
+{% extends './layout.html' %}
+
+{% block content %}
+
+<div class="products-container">
+    {% for product in product_list %}
+        <a href="{% url 'product_details' product.pk %}">
+            {{ product.productName }}
+        </a>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
