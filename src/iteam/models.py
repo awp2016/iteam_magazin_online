@@ -1,9 +1,9 @@
-from django.db import models
-from django.core.urlresolvers import reverse
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-from ckeditor.fields import RichTextField
+from django.core.urlresolvers import reverse
+from django.db import models
 
 
 class UserManager(BaseUserManager):
@@ -88,7 +88,6 @@ class User(AbstractBaseUser):
     def username(self):
         return self.email
 
-
     class Meta:
         db_table = 'users'
 
@@ -115,12 +114,19 @@ class Product(models.Model):
                        kwargs={'pk': self.pk})
 
 
+class Review(models.Model):
+    product = models.OneToOneField(Product, primary_key=True, on_delete=models.CASCADE)
+    text = models.CharField(max_length=500)
+    date = models.DateField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 class ShoppingCart(models.Model):
-	user = models.OneToOneField(User,primary_key=True, related_name='cart')
-	products = models.ManyToManyField(Product, through='Order')
+    user = models.OneToOneField(User, primary_key=True, related_name='cart')
+    products = models.ManyToManyField(Product, through='Order')
 
 
 class Order(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-	quantity = models.IntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)

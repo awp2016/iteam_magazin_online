@@ -1,15 +1,19 @@
 {% extends './layout.html' %}
 
 {% block head %}
-  <h1>Product details</h1>
+    <h1>Product details</h1>
 {% endblock %}
 
 {% block content %}
 
-<div class="product-details-container">
-    <div class="product-name">
-        {{ product.productName }}
+    <div class="product-details-container">
+        <div class="product-name">
+            {{ product.productName }}
+        </div>
+        {% for review in reviews %}
+            <p>review.text</p>
+            <p>by review.author.firstName at review.date</p>
+        {% endfor %}
     </div>
-</div>
 
 {% endblock %}

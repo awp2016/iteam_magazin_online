@@ -1,10 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic.edit import UpdateView
-from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
-
 from iteam.models import Order
+
 from . import models
+
 
 class ProductsListView(ListView):
     model = models.Product
@@ -22,10 +22,13 @@ class ProductsListView(ListView):
 
 def product_details(request, pk):
     product = models.Product.objects.get(pk=pk)
+    reviews = models.Review.objects.get(pk=pk)
     context = {
-        'product': product
+        'product': product,
+        'reviews': reviews
     }
     return render(request, 'product_details.html', context)
+
 
 def shopping_cart(request, pk):
     cart = models.ShoppingCart.objects.get(pk=pk)
@@ -38,6 +41,7 @@ def shopping_cart(request, pk):
     }
     return render(request, 'view_shopping_cart.html', context)
 
+
 def remove_item(request, pk):
     order = models.Order.objects.get(pk=pk)
     if order.quantity == 1:
@@ -49,13 +53,14 @@ def remove_item(request, pk):
     user = cart.user
     orders = Order.objects.get(cart=cart)
     context = {
-     'cart': cart,
-     'user': user,
-     'orders': orders
+        'cart': cart,
+        'user': user,
+        'orders': orders
     }
     return render(request, 'view_shopping_cart.html', context)
 
-def add_item(request,pk_cart,pk_product,quantity):
+
+def add_item(request, pk_cart, pk_product, quantity):
     cart = models.ShoppingCart.objects.get(pk=pk_cart)
     product = models.Product.objects.get(pk=pk_product)
     order = Order(cart=cart, product=product, quantity=quantity)
@@ -63,9 +68,9 @@ def add_item(request,pk_cart,pk_product,quantity):
     orders = Order.objects.get(cart=cart)
     user = cart.user
     context = {
-     'cart': cart,
-     'user': user,
-     'orders': orders
+        'cart': cart,
+        'user': user,
+        'orders': orders
     }
     return render(request, 'view_shopping_cart.html', context)
 

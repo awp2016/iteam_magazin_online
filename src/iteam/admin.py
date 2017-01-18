@@ -1,6 +1,7 @@
-from iteam.models import User
-from iteam.models import Product
 from django.contrib import admin
+from iteam.models import Product
+from iteam.models import User
+from iteam.models import Review
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -9,3 +10,4 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Product)
+admin.site.register(Review)
