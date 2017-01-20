@@ -30,7 +30,7 @@ def product_details(request, pk):
 def shopping_cart(request, pk):
     cart = models.ShoppingCart.objects.get(pk=pk)
     user = cart.user
-    orders = Order.objects.get(cart=cart)
+    orders = models.Order.objects.filter(cart=cart)
     context = {
         'cart': cart,
         'user': user,
@@ -40,14 +40,15 @@ def shopping_cart(request, pk):
 
 def remove_item(request, pk):
     order = models.Order.objects.get(pk=pk)
+    cart = order.cart
+    user = cart.user
     if order.quantity == 1:
         order.delete()
     else:
         order.quantity -= 1
-    order.save()
-    cart = order.cart
-    user = cart.user
-    orders = Order.objects.get(cart=cart)
+    	order.save()
+    
+    orders = models.Order.objects.filter(cart=cart)
     context = {
      'cart': cart,
      'user': user,
@@ -55,12 +56,17 @@ def remove_item(request, pk):
     }
     return render(request, 'view_shopping_cart.html', context)
 
-def add_item(request,pk_cart,pk_product,quantity):
+def add_item(request,pk_cart,pk_produs):
     cart = models.ShoppingCart.objects.get(pk=pk_cart)
-    product = models.Product.objects.get(pk=pk_product)
-    order = Order(cart=cart, product=product, quantity=quantity)
-    order.save()
-    orders = Order.objects.get(cart=cart)
+    product = models.Product.objects.get(pk=pk_produs)
+    check_order = models.Order.objects.get(product=product)
+    if check_order is None:
+        order = Order(cart=cart, product=product, quantity=1)
+        order.save()
+    else:
+        check_order.quantity += 1
+        check_order.save()    
+    orders = models.Order.objects.filter(cart=cart)
     user = cart.user
     context = {
      'cart': cart,
