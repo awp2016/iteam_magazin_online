@@ -19,8 +19,11 @@ class ProductsListView(ListView):
     def get_queryset(self):
         return self.model.objects.order_by('-price')
 
-def index(request):
-    products = models.Product.objects.all()
+def index(request, gender = None):
+    if gender is None:
+        products = models.Product.objects.all()
+    else:
+        products = models.Product.objects.filter(gender=gender)
     tup = []
     for prod in products:
         image = models.Image.objects.filter(product=prod).first

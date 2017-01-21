@@ -1,10 +1,10 @@
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from ckeditor.fields import RichTextField
-
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -22,6 +22,7 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
+        ShoppingCart.objects.create(user = user)
         return user
 
     def create_superuser(self, email, password):
@@ -88,9 +89,9 @@ class User(AbstractBaseUser):
     def username(self):
         return self.email
 
-
     class Meta:
         db_table = 'users'
+
 
 
 class Product(models.Model):
@@ -111,16 +112,22 @@ class Product(models.Model):
         return reverse('product_details',
                        kwargs={'pk': self.pk})
 
+
 class Image(models.Model):
     source = models.ImageField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
-class ShoppingCart(models.Model):
-	user = models.OneToOneField(User,primary_key=True, related_name='cart')
-	products = models.ManyToManyField(Product, through='Order')
 
+class ShoppingCart(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart')
+    products = models.ManyToManyField(Product, through='Order')
+
+
+    def getNrOrders(self):
+        return len(Order.objects.filter(cart=self))
 
 class Order(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-	quantity = models.IntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+

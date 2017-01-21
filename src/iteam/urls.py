@@ -12,6 +12,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
+	url(r'^gender/(?P<gender>.+)/$', views.index, name="index"),
 	url(r'^product/(?P<pk>\d+)/$', views.product_details, name='product_details'),
 	url(r'^shopping-cart/(?P<pk>\d+)/$', views.shopping_cart, name='shopping_cart'),
 	url(r'^remove-one-item/(?P<pk>\d+)/$', views.remove_item, name='remove_item'),

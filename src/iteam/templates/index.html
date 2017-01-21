@@ -2,7 +2,15 @@
 
 {% block content %}
 <div class="product-sort">
-
+     <a class="button-negative" href="{% url 'index' 'M' %}">
+            Male
+     </a>
+    <a class="button-negative" href="{% url 'index' 'F' %}">
+            Female
+     </a>
+    <a class="button-negative" href="{{ BASE_URL }}/">
+            All
+     </a>
 </div>
 <div class="products-container">
     {% for tup in tuplu %}
@@ -24,3 +32,4 @@
 
 
 {% endblock %}
+
