@@ -1,11 +1,10 @@
 from django.contrib import admin
-from iteam.models import User
-from iteam.models import Product
-from iteam.models import ShoppingCart
+
+from iteam.models import Comment
 from iteam.models import Order
 from iteam.models import Product
+from iteam.models import ShoppingCart
 from iteam.models import User
-from iteam.models import Review
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -16,5 +15,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Product)
 admin.site.register(ShoppingCart)
 admin.site.register(Order)
-
-admin.site.register(Review)
+admin.site.register(Comment)

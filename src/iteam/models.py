@@ -114,8 +114,8 @@ class Product(models.Model):
                        kwargs={'pk': self.pk})
 
 
-class Review(models.Model):
-    product = models.OneToOneField(Product, primary_key=True, on_delete=models.CASCADE)
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     date = models.DateField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
