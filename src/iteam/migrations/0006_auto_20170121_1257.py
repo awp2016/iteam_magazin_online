@@ -5,11 +5,11 @@ from django.db import migrations, models
 from iteam.models import User
 
 
-def super_user(apps, schema_editor):
-    try:
-        User.objects.get(email="admin@admin.com")
-    except:
-        User.objects.create_superuser(email="admin@admin.com", password="admin")
+# def super_user(apps, schema_editor):
+    # try:
+        # User.objects.get(email="admin@admin.com")
+    # except:
+        # User.objects.create_superuser(email="admin@admin.com", password="admin")
 
 
 class Migration(migrations.Migration):
@@ -19,5 +19,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-            migrations.RunPython(super_user),
+            # migrations.RunPython(super_user),
     ]
