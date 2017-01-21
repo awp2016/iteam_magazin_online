@@ -65,7 +65,7 @@ class User(AbstractBaseUser):
 
     @property
     def get_shopping_active(self):
-        return ShoppingCart.objects.filter(date=None, user=self)
+        return ShoppingCart.objects.get(date__isnull=True, user=self).pk
 
     def __unicode__(self):
         return self.email
@@ -130,6 +130,7 @@ class Comment(models.Model):
 class ShoppingCart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart')
     products = models.ManyToManyField(Product, through='Order')
+    date = models.DateField(blank=True, null=True)
 
     def getNrOrders(self):
         return len(Order.objects.filter(cart=self))
