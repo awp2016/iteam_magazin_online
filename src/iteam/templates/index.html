@@ -17,7 +17,7 @@
     {% for tup in tuplu %}
         <div class="product-container">
             <a href="{% url 'product_details' tup.0.pk %}">
-                <img src="media/{{ tup.1.source }}"/>
+                <img src="{{ BASE_URL }}/media/{{ tup.1.source }}"/>
             </a>
 
             <div class="product-details">
