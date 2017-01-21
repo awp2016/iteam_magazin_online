@@ -27,17 +27,24 @@ class ProductsListView(ListView):
 
 
 def index(request, gender=None):
-    if gender is None:
-        products = models.Product.objects.all()
+    if request.method == 'POST':
+        form = forms.SearchForm(request.POST)
+        if form.is_valid():
+            products = models.Product.objects.filter(productName__icontains=form.cleaned_data['text'])
     else:
-        products = models.Product.objects.filter(gender=gender)
+        form = forms.SearchForm()
+        if gender is None:
+            products = models.Product.objects.all()
+        else:
+            products = models.Product.objects.filter(gender=gender)
     tup = []
     for prod in products:
         image = models.Image.objects.filter(product=prod).first
         tuplu = (prod, image)
         tup.append(tuplu)
     context = {
-        'tuplu': tup
+        'tuplu': tup,
+        'form_search': form
     }
     return render(request, 'index.html', context)
 
@@ -50,7 +57,6 @@ def product_details(request, pk):
     context = {
         'product': product,
         'comments': comments,
-        'form_comment': form_comment,
         'form_comment': form_comment,
         'images': images
     }
