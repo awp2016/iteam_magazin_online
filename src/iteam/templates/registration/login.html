@@ -1,7 +1,8 @@
-<html>
-  <head>
-  </head>
-  <body>
+
+{% extends './layout.html' %}
+
+{% block content %}
+
     {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -14,6 +15,7 @@
         <p>Please login to see this page.</p>
         {% endif %}
     {% endif %}
+
 
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
@@ -28,11 +30,14 @@
     </tr>
     </table>
 
-    <input type="submit" value="login" />
+
+    <input class="button-positive" type="submit" value="Go!" />
+
     <input type="hidden" name="next" value="{{ next }}" />
     </form>
 
     {# Assumes you setup the password_reset view in your URLconf #}
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-  </body>
-</html>
+    <p><a class="link" href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}
+
