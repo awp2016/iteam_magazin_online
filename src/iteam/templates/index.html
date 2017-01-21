@@ -2,13 +2,21 @@
 
 {% block content %}
 <div class="product-sort">
-
+     <a class="button-negative" href="{% url 'index' 'M' %}">
+            Male
+     </a>
+    <a class="button-negative" href="{% url 'index' 'F' %}">
+            Female
+     </a>
+    <a class="button-negative" href="{{ BASE_URL }}/">
+            All
+     </a>
 </div>
 <div class="products-container">
-    {% for product in product_list %}
+    {% for product in products %}
         <div class="product-container">
             <a href="{% url 'product_details' product.pk %}">
-                <img src="media/{{ product.imagesource1 }}"/>
+                <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
             </a>
 
             <div class="product-details">

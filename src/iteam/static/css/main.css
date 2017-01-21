@@ -295,3 +295,6 @@ footer{
     font-size: 17px;
     text-transform: none;
 }
+.product-sort a{
+    margin: 0 1px;
+}

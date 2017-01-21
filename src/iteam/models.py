@@ -5,7 +5,6 @@ from django.contrib.auth.models import (
 )
 from ckeditor.fields import RichTextField
 
-
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         """
@@ -88,7 +87,6 @@ class User(AbstractBaseUser):
     def username(self):
         return self.email
 
-
     class Meta:
         db_table = 'users'
 
@@ -116,11 +114,14 @@ class Product(models.Model):
 
 
 class ShoppingCart(models.Model):
-	user = models.OneToOneField(User,primary_key=True, related_name='cart')
-	products = models.ManyToManyField(Product, through='Order')
+    user = models.OneToOneField(User, primary_key=True, related_name='cart')
+    products = models.ManyToManyField(Product, through='Order')
+
+    def getNrOrders(self):
+        return len(Order.objects.filter(cart=self))
 
 
 class Order(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-	quantity = models.IntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)

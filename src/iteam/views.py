@@ -7,32 +7,16 @@ from iteam.models import Order
 from . import models
 
 
-class ProductsListView(ListView):
-    model = models.Product
-    template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductsListView, self).get_context_data(**kwargs)
-        products = self.model.objects.all()
-        context['products'] = products
-        return context
-
-    def get_queryset(self):
-        return self.model.objects.order_by('-price')
-
-
-class ProductsSort(ProductsListView):
-    template_name = "index.html"
-    slug_url_kwarg = "gender"
-    slug_field = 'gender'
-    model = ProductsListView
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductsSort, self).get_context_data(**kwargs)
-        if self.slug_field:
-            context['object'] = ProductsSort.objects.all()
-
-        return context
+def index(request,gender=None):
+    print(gender)
+    if gender is None:
+        products = models.Product.objects.all()
+    else:
+        products = models.Product.objects.filter(gender=gender)
+    context = {
+        'products': products
+    }
+    return render(request, 'index.html', context)
 
 
 def product_details(request, pk):
