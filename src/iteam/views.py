@@ -10,6 +10,7 @@ from iteam.models import Order
 from iteam.models import Product
 from iteam.models import ShoppingCart
 from . import models
+import datetime
 
 
 class ProductsListView(ListView):
@@ -34,9 +35,9 @@ def index(request, gender=None):
     else:
         form = forms.SearchForm()
         if gender is None:
-            products = models.Product.objects.all()
+            products = models.Product.objects.filter(quantity__gt=0)
         else:
-            products = models.Product.objects.filter(gender=gender)
+            products = models.Product.objects.filter(gender=gender, quantity__gt=0)
     tup = []
     for prod in products:
         image = models.Image.objects.filter(product=prod).first
@@ -84,6 +85,33 @@ def shopping_cart(request, pk):
         'cart': cart,
         'user': user,
         'tuplu': tup
+    }
+    return render(request, 'view_shopping_cart.html', context)
+
+
+def shopping_history(request, pk):
+    user = models.User.objects.get(pk=pk)
+    carts = models.ShoppingCart.objects.filter(user=user,date__isnull=False)
+    context = {
+        'carts': carts,
+        'user': user
+    }
+    return render(request, 'view_shopping_history.html', context)
+
+def place_order(request, pk):
+    cart = models.ShoppingCart.objects.get(pk=pk)
+    orders = models.Order.objects.filter(cart=cart)
+    for order in orders:
+        order.product.quantity -= order.quantity
+        order.product.save()
+    cart.date = datetime.datetime.now()
+    cart.save()
+    new_cart = models.ShoppingCart(user=cart.user)
+    new_cart.save()
+    user = new_cart.user
+    context = {
+        'cart': new_cart,
+        'user': user
     }
     return render(request, 'view_shopping_cart.html', context)
 
