@@ -9,3 +9,4 @@ src/.idea/*
 .idea
 .idea/*
 src/media
+*.pyc
