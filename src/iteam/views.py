@@ -1,7 +1,7 @@
 import datetime
 
 from django.shortcuts import render
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, CreateView
 from django.views.generic.list import ListView
 
 from iteam import forms
@@ -11,6 +11,12 @@ from iteam.models import Product
 from iteam.models import ShoppingCart
 from . import models
 
+
+class SignUpView(CreateView):
+        form_class = forms.UserCreationCustomForm
+        model = models.User
+        success_url = "/"
+        template_name = "registration/signup.html"
 
 class ProductsListView(ListView):
     model = Product

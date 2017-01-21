@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 	url(r'^add-item/(?P<pk_cart>\d+)/(?P<pk_produs>\d+)/$', views.add_item, name='add_item'),
     url(r'^edit_info/(?P<pk>\d+)/', views.EditProfileView.as_view(), name="edit_user"),
     url(r'^admin/', include(admin.site.urls)),  # NOQA
-     url('^', include('django.contrib.auth.urls')),
+    url('^', include('django.contrib.auth.urls')),
+    url('^register/',  views.SignUpView.as_view(), name='signup'),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
