@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -94,7 +95,25 @@ class User(AbstractBaseUser):
 
 
 class Product(models.Model):
-	pass
+    PRODUCT_GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female')
+    )
+    productName = models.CharField(max_length=50)
+    description = models.TextField(null=True, blank=True)
+    quantity = models.IntegerField(default=0)
+    gender = models.CharField(max_length=1, choices=PRODUCT_GENDER)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    imagesource1 = models.ImageField(null=True, blank=True)
+    imagesource2 = models.ImageField(null=True, blank=True)
+    imagesource3 = models.ImageField(null=True, blank=True)
+
+    def __str__(self):  # __str__ for Python 3, __unicode__ for Python 2
+        return self.productName
+
+    def get_absolute_url(self):
+        return reverse('product_details',
+                       kwargs={'pk': self.pk})
 
 
 class ShoppingCart(models.Model):

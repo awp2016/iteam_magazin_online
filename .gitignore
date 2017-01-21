@@ -1,7 +1,6 @@
 .vagrant
-static
-static/*
-*/static/*
+src/static
+src/static/*
 *.py[cod]
 *.pyc
 */__pycache__
@@ -22,3 +21,10 @@ src/static/*
 src/media/
 src/media
 src/media/*
+*/src/.idea/*
+src/.idea
+src/.idea/*
+.idea
+.idea/*
+src/media
+*.pyc
