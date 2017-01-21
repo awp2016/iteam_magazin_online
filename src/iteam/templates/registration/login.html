@@ -1,14 +1,8 @@
-<<<<<<< HEAD
+
 {% extends './layout.html' %}
 
 {% block content %}
 
-=======
-<html>
-  <head>
-  </head>
-  <body>
->>>>>>> 2e100b9257aef74a84ce4712577f057e37dec63d
     {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -22,16 +16,9 @@
         {% endif %}
     {% endif %}
 
-<<<<<<< HEAD
-    <form class="login-form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
-    {% csrf_token %}
-        <div class="login-title">
-            <h2>Log In</h2>
-        </div>
-=======
+
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
->>>>>>> 2e100b9257aef74a84ce4712577f057e37dec63d
     <table>
     <tr>
         <td>{{ form.username.label_tag }}</td>
@@ -43,21 +30,14 @@
     </tr>
     </table>
 
-<<<<<<< HEAD
+
     <input class="button-positive" type="submit" value="Go!" />
-=======
-    <input type="submit" value="login" />
->>>>>>> 2e100b9257aef74a84ce4712577f057e37dec63d
+
     <input type="hidden" name="next" value="{{ next }}" />
     </form>
 
     {# Assumes you setup the password_reset view in your URLconf #}
-<<<<<<< HEAD
     <p><a class="link" href="{% url 'password_reset' %}">Lost password?</a></p>
 
 {% endblock %}
-=======
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-  </body>
-</html>
->>>>>>> 2e100b9257aef74a84ce4712577f057e37dec63d
+
