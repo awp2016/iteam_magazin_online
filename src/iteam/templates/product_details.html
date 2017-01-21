@@ -4,12 +4,18 @@
 {% block content %}
 
     <div class="product-image-container">
-        <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
+        <img src="{{ BASE_URL }}/media/{{ images.first.source }}"/>
     </div>
     <div class="product-details-container">
         <div class="product-name">
             <p>{{ product.productName }}</p>
-            <a class="button-positive" href="{% url 'add_item' user.cart.pk product.pk %}">
+            <a class="button-positive" href="
+            {% if user.is_authenticated %}
+            {% url 'add_item' user.get_shopping_active.pk product.pk %}
+            {% else %}
+
+            {% endif %}
+            ">
                 Add to Cart
             </a>
         </div>
@@ -30,23 +36,41 @@
             {{ product.price }} $
         </div>
         <div class="product-detail" style="margin: 0 -1.6%;">
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource1 }}">
-                    <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
-                </a>
-            </div>
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource2 }}">
-                <img src="{{ BASE_URL }}/media/{{ product.imagesource2 }}"/>
-                </a>
-            </div>
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource3 }}">
-                <img src="{{ BASE_URL }}/media/{{ product.imagesource3 }}"/>
-                </a>
-            </div>
+            {% for image in images %}
+                <div class="product-img">
+                    <a href="{{ BASE_URL }}/media/{{ image.source }}">
+                        <img src="{{ BASE_URL }}/media/{{ image.source }}"/>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
+        {% if user.is_authenticated %}
+            <div class="write-comment">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form_comment.as_p }}
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        {% else %}
+            <div class="write-comment">
+                <p>You need to login to comment</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="product-comments">
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <p>{{ comment.text }}</p>
+                    <p>{{ comment.date }}</p>
+                    <p>by {{ comment.author.firstName }} {{ comment.author.lastName }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
 
+        {% endif %}
+    </div>
     </div>
 
 {% endblock %}

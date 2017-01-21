@@ -1,34 +1,35 @@
 <html>
-  <head>
+<head>
     <title>iShop</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
-  <header class="main-header">
+<body>
+<header class="main-header">
     <div class="content-container">
-         {% block head %}
-         <a href="/" class="header-logo">
-             <h1>iShop</h1>
-         </a>
-         <div class="header-right">
-           {% if user.is_authenticated %}
-            <a class="button-positive" href="{% url 'shopping_cart' user.cart.pk %}">View cart</a>
-            {% endif %}
-         </div>
-         {% endblock %}
+        {% block head %}
+            <a href="/" class="header-logo">
+                <h1>iShop</h1>
+            </a>
+            <div class="header-right">
+                {% if user.is_authenticated %}
+                    <a class="button-positive" href="{% url 'shopping_cart' user.get_shopping_active.pk %}">View
+                        cart {{ user.get_shopping_active.getNrOrders }}</a>
+                {% endif %}
+            </div>
+        {% endblock %}
     </div>
-  </header>
-  <div class="page-container">
+</header>
+<div class="page-container">
     <div class="content-container">
         {% block content %}
         {% endblock %}
     </div>
-  </div>
-  <footer>
-      © iTeam 2017
-  </footer>
-  </body>
+</div>
+<footer>
+    © iTeam 2017
+</footer>
+</body>
 </html>

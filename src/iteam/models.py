@@ -1,10 +1,10 @@
-from django.db import models
+from ckeditor.fields import RichTextField
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-from ckeditor.fields import RichTextField
+from django.core.urlresolvers import reverse
+from django.db import models
 
 
 class UserManager(BaseUserManager):
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        ShoppingCart.objects.create(user = user)
+        ShoppingCart.objects.create(user=user)
         return user
 
     def create_superuser(self, email, password):
@@ -63,6 +63,10 @@ class User(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
+    @property
+    def get_shopping_active(self):
+        return ShoppingCart.objects.get(date__isnull=True, user=self)
+
     def __unicode__(self):
         return self.email
 
@@ -94,7 +98,6 @@ class User(AbstractBaseUser):
         db_table = 'users'
 
 
-
 class Product(models.Model):
     PRODUCT_GENDER = (
         ('M', 'Male'),
@@ -105,9 +108,6 @@ class Product(models.Model):
     quantity = models.IntegerField(default=0)
     gender = models.CharField(max_length=1, choices=PRODUCT_GENDER)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    imagesource1 = models.ImageField(null=True, blank=True)
-    imagesource2 = models.ImageField(null=True, blank=True)
-    imagesource3 = models.ImageField(null=True, blank=True)
 
     def __str__(self):  # __str__ for Python 3, __unicode__ for Python 2
         return self.productName
@@ -117,12 +117,28 @@ class Product(models.Model):
                        kwargs={'pk': self.pk})
 
 
+class Image(models.Model):
+    source = models.ImageField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    text = models.CharField(max_length=500)
+    date = models.DateField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 class ShoppingCart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart')
     products = models.ManyToManyField(Product, through='Order')
+    date = models.DateField(blank=True, null=True)
+
+    def getNrOrders(self):
+        return len(Order.objects.filter(cart=self))
 
 
 class Order(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-	quantity = models.IntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
