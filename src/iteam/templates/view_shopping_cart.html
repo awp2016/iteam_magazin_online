@@ -26,6 +26,7 @@
 		<td class="num-cell">{{tup.0.quantity}}</td>
         <td class="num-cell">{% widthratio tup.0.quantity 1 tup.0.product.price %}</td>
 		<td>
+            {% if cart.date__isnull == True %}
             <a href="{% url 'remove_item' tup.0.pk %}" class="link-del">Remove item</a>
         </td>
 	</tr>
@@ -41,5 +42,7 @@
 {% endif %}
 
 </table>
-
+{% if tuplu and cart.date__isnull == True %}
+    <a href="{% url 'place_order' cart.pk %}">Place order</a>
+{% endif %}
 {% endblock %}
