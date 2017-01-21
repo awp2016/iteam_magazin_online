@@ -65,7 +65,7 @@ class User(AbstractBaseUser):
 
     @property
     def get_shopping_active(self):
-        return ShoppingCart.objects.get(date__isnull=True, user=self).pk
+        return ShoppingCart.objects.get(date__isnull=True, user=self)
 
     def __unicode__(self):
         return self.email
@@ -137,8 +137,8 @@ class ShoppingCart(models.Model):
     def getNrOrders(self):
         return len(Order.objects.filter(cart=self))
 
+
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-

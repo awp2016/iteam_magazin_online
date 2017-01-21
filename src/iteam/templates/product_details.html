@@ -11,7 +11,7 @@
             <p>{{ product.productName }}</p>
             <a class="button-positive" href="
             {% if user.is_authenticated %}
-            {% url 'add_item' user.cart.pk product.pk %}
+            {% url 'add_item' user.get_shopping_active.pk product.pk %}
             {% else %}
 
             {% endif %}

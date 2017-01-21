@@ -25,7 +25,8 @@ class ProductsListView(ListView):
     def get_queryset(self):
         return self.model.objects.order_by('-price')
 
-def index(request, gender = None):
+
+def index(request, gender=None):
     if gender is None:
         products = models.Product.objects.all()
     else:
@@ -40,15 +41,17 @@ def index(request, gender = None):
     }
     return render(request, 'index.html', context)
 
+
 def product_details(request, pk):
     form_comment = forms.CommentForm()
-    product = Product.objects.get(pk=pk)
-    comments = Comment.objects.filter(product=product).order_by('-date')
+    product = models.Product.objects.get(pk=pk)
     images = models.Image.objects.filter(product=product)
+    comments = Comment.objects.filter(product=product).order_by('-date')
     context = {
         'product': product,
         'comments': comments,
-        'form_comment': form_comment
+        'form_comment': form_comment,
+        'form_comment': form_comment,
         'images': images
     }
     if request.method == 'POST':
@@ -119,7 +122,7 @@ def add_item(request, pk_cart, pk_produs):
     context = {
         'cart': cart,
         'user': user,
-     'tuplu': tup
+        'tuplu': tup
     }
     return render(request, 'view_shopping_cart.html', context)
 
