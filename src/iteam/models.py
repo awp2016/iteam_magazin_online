@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -97,7 +98,7 @@ class Product(models.Model):
 
 
 class ShoppingCart(models.Model):
-	user = models.OneToOneField(User,primary_key=True, related_name='cart')
+	user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cart')
 	products = models.ManyToManyField(Product, through='Order')
 
 
