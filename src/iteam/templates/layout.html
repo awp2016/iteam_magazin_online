@@ -17,8 +17,10 @@
                 {% if user.is_authenticated %}
                     <a class="button-positive cart-button" href="{% url 'shopping_cart' user.get_shopping_active.pk %}">View
                         cart &nbsp;&nbsp;&nbsp;<span>{{ user.get_shopping_active.getNrOrders }}</span></a>
+                    <a class="button-positive cart-button" href="{% url 'shopping_history' user.pk %}">View
+                         history </a>
                     <a class="button-negative" href="{{ BASE_URL }}/logout"> Log out </a>
-                    {% else %}
+                {% else %}
                     <a class="button-negative login-button" href="{{ BASE_URL }}/login"> Log in </a>
                 {% endif %}
             </div>

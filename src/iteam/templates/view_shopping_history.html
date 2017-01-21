@@ -1,0 +1,28 @@
+{% extends './layout.html' %}
+
+{% block content %}
+
+<h2> Shopping history </h2>
+
+<table class="cart-table">
+{% if carts %}
+    {% for cart in carts %}
+	<tr>
+        <td>
+            Order date: {{ cart.date }}
+        </td>
+		<td>
+            <a class="link" href="{% url 'shopping_cart' cart.pk %}">View cart</a>
+        </td>
+	</tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td></td>
+        <td>No carts in your history.</td>
+    </tr>
+{% endif %}
+
+</table>
+
+{% endblock %}
