@@ -46,7 +46,7 @@ def remove_item(request, pk):
         order.delete()
     else:
         order.quantity -= 1
-    	order.save()
+        order.save()
     
     orders = models.Order.objects.filter(cart=cart)
     context = {
