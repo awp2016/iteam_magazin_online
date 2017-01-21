@@ -1,23 +1,23 @@
 ﻿@font-face {
-	font-family:'Proxima';
-	src: url('../fonts/ProximaNova-Regular.otf') format('opentype');
+    font-family: 'Proxima';
+    src: url('../fonts/ProximaNova-Regular.otf') format('opentype');
 }
 
 @font-face {
-	font-family:'ProximaBold';
-	src: url('../fonts/ProximaNova-Extrabold.otf') format('opentype');
+    font-family: 'ProximaBold';
+    src: url('../fonts/ProximaNova-Extrabold.otf') format('opentype');
 }
 
-body{
+body {
     margin: 0px;
-    font-family:'Proxima';
-    color:#2b2d42;
-    position:relative;
+    font-family: 'Proxima';
+    color: #2b2d42;
+    position: relative;
 }
 
-.button-negative{
+.button-negative {
     background: none;
-    border:1px solid rgba(217, 4, 41, 0.58);
+    border: 1px solid rgba(217, 4, 41, 0.58);
     padding: 10px 22px;
     color: #2b2d42;
     text-transform: uppercase;
@@ -26,17 +26,18 @@ body{
     -webkit-transition: 0.2s;
     transition: 0.2s;
     text-decoration: none;
+    line-height: 18px;
 }
+
 .button-negative:hover {
     background: #d90429;
     color: #FDFFFC;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-
-.button-positive{
-       background: none;
-    border:1px solid rgba(43, 45, 66, 0.04);
+.button-positive {
+    background: none;
+    border: 1px solid rgba(43, 45, 66, 0.28);
     padding: 10px 22px;
     color: #2b2d42;
     text-transform: uppercase;
@@ -45,79 +46,117 @@ body{
     -webkit-transition: 0.2s;
     transition: 0.2s;
     text-decoration: none;
+    line-height: 18px;
 }
+
 .button-positive:hover {
     background: #2b2d42;
     color: #FDFFFC;
     cursor: pointer;
 }
+
 .button-positive:focus {
     outline: none;
 }
-.link-del{
-    color:#d90429;
+
+.link-del {
+    color: #d90429;
     -webkit-transition: 0.2s;
     transition: 0.2s;
     text-decoration: none;
-        font-size: 13px;
+    font-size: 13px;
     text-transform: uppercase;
     font-family: ProximaBold;
     border-bottom: 2px solid rgba(217, 4, 41, 0);
 }
-.link-del:hover{
+
+.link-del:hover {
     border-bottom: 2px solid #d90429;
 }
 
-.link{
-    color:#2b2d42;
+.link {
+    color: #2b2d42;
     -webkit-transition: 0.2s;
     transition: 0.2s;
     text-decoration: none;
-        font-size: 13px;
+    font-size: 13px;
     text-transform: uppercase;
     font-family: ProximaBold;
     border-bottom: 2px solid rgba(217, 4, 41, 0);
 }
-.link:hover{
+
+.link:hover {
     border-bottom: 2px solid #2b2d42;
 }
 
-
-.content-container{
+.content-container {
     width: 95%;
     max-width: 1280px;
     display: inline-block;
     line-height: 100px;
-    position:relative;
+    position: relative;
 }
-.page-container{
-    text-align:center;
-    padding-bottom:100px;
+
+.page-container {
+    text-align: center;
+    padding-bottom: 100px;
 }
-header{
-        height: 100px;
+
+header {
+    height: 100px;
     line-height: 100px;
     text-align: center;
     background: white;
 }
-.header-logo{
+
+.header-logo {
     font-family: ProximaBold;
     color: #2b2d42;
-    margin:0;
-        text-decoration: none;
-    float:left;
+    margin: 0;
+    text-decoration: none;
+    float: left;
 }
-.header-logo h1{
-    margin:0;
+
+.header-logo h1 {
+    margin: 0;
     display: inline-block;
     padding: 0 20px;
 }
-.header-right{
-        position: absolute;
+
+.header-right {
+    position: absolute;
     right: 0;
     top: 0;
+    height: 100px;
+    line-height: 100px;
 }
-footer{
+
+.login-button {
+    display: inline-block;
+    margin-top:30px;
+}
+
+.cart-button {
+    padding: 10px 18px 10px 22px;
+}
+
+.cart-button span {
+    padding: 5px 8px 4px 7px;
+    text-align: center;
+    background: #d90429;
+    border-radius: 20px;
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    color: white;
+}
+
+.cart-button:hover span {
+    background: white;
+    color: #2b2d42;
+}
+
+footer {
     height: 70px;
     line-height: 70px;
     text-align: center;
@@ -129,142 +168,163 @@ footer{
     bottom: 0;
     width: 100%;
 }
-.products-container{
+
+.products-container {
     width: 80%;
     display: inline-block;
     margin-top: 30px;
 }
-.product-container{
+
+.product-container {
     width: 30%;
     display: inline-block;
     overflow: hidden;
     height: 0;
-   /* padding-bottom: 46%; */
+    /* padding-bottom: 46%; */
     padding-bottom: 30%;
     margin: 1.5%;
-    position:relative;
+    position: relative;
 }
-.product-container a{
-        display: inline-block;
+
+.product-container a {
+    display: inline-block;
     width: 100%;
     height: auto;
 }
-.product-container a img{
+
+.product-container a img {
     width: 100%;
-      -webkit-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
     transition: all 0.3s;
 }
-.product-container:hover img{
-        -webkit-transform: scale3D(1.05,1.05,1.05);
-    -moz-transform: scale3D(1.05,1.05,1.05);
-    -ms-transform: scale3D(1.05,1.05,1.05);
-    -o-transform: scale3D(1.05,1.05,1.05);
-    transform: scale3D(1.05,1.05,1.05);
+
+.product-container:hover img {
+    -webkit-transform: scale3D(1.05, 1.05, 1.05);
+    -moz-transform: scale3D(1.05, 1.05, 1.05);
+    -ms-transform: scale3D(1.05, 1.05, 1.05);
+    -o-transform: scale3D(1.05, 1.05, 1.05);
+    transform: scale3D(1.05, 1.05, 1.05);
     opacity: 0.33;
 }
-.product-details{
-        position: absolute;
+
+.product-details {
+    position: absolute;
     bottom: 50px;
     width: 100%;
     height: 50px;
-          -webkit-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
     transition: all 0.3s;
-    opacity:0;
+    opacity: 0;
 }
-.product-container:hover .product-details{
-    opacity:1;
+
+.product-container:hover .product-details {
+    opacity: 1;
 }
-.product-details .product-title{
+
+.product-details .product-title {
     display: inline-block;
     line-height: 15px;
     clear: both;
     padding: 10px 0;
     color: #d90429;
-     font-family: ProximaBold;
+    font-family: ProximaBold;
     text-decoration: none;
 }
-.product-details .product-buy{
+
+.product-details .product-buy {
     width: auto;
     height: auto;
     line-height: 15px;
 }
 
-.product-image-container{
+.product-image-container {
     width: 50%;
     display: inline-block;
     float: left;
     height: 0;
     padding-bottom: 65%;
     overflow: hidden;
-        margin-top: 30px;
+    margin-top: 30px;
 }
-.product-image-container img{
+
+.product-image-container img {
     width: 100%;
 }
-.product-details-container{
-    width:50%;
-    display:inline-block;
-    text-align:center;
-        margin-top: 60px;
+
+.product-details-container {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 60px;
     padding-left: 50px;
     box-sizing: border-box;
+    min-height: 832px;
 }
-.product-name{
-        text-align: center;
+
+.product-name {
+    text-align: center;
     line-height: 40px;
     font-family: ProximaBold;
     text-transform: uppercase;
     font-size: 16px;
     color: #d90429;
 }
-.product-name p{
-    margin:0;
+
+.product-name p {
+    margin: 0;
 }
-.product-detail{
-        line-height: 20px;
+
+.product-detail {
+    line-height: 20px;
     text-align: left;
     margin: 30px 0;
     font-size: 13px;
 }
-.product-detail span{
+
+.product-detail span {
     font-family: ProximaBold;
     text-transform: uppercase;
     color: #2b2d42;
 }
-.product-detail .product-img{
+
+.product-detail .product-img {
     width: 30%;
     display: inline-block;
     float: left;
     height: 0;
     padding-bottom: 30%;
     overflow: hidden;
-        margin: 1.6%;
+    margin: 1.6%;
 }
-.product-detail .product-img img{
-    width:100%;
-          -webkit-transition: all 0.3s;
+
+.product-detail .product-img img {
+    width: 100%;
+    -webkit-transition: all 0.3s;
     transition: all 0.3s;
 }
 
-.product-detail .product-img:hover img{
-        -webkit-transform: scale3D(1.05,1.05,1.05);
-    -moz-transform: scale3D(1.05,1.05,1.05);
-    -ms-transform: scale3D(1.05,1.05,1.05);
-    -o-transform: scale3D(1.05,1.05,1.05);
-    transform: scale3D(1.05,1.05,1.05);
+.product-detail .product-img:hover img {
+    -webkit-transform: scale3D(1.05, 1.05, 1.05);
+    -moz-transform: scale3D(1.05, 1.05, 1.05);
+    -ms-transform: scale3D(1.05, 1.05, 1.05);
+    -o-transform: scale3D(1.05, 1.05, 1.05);
+    transform: scale3D(1.05, 1.05, 1.05);
     opacity: 0.4;
 }
-.order-product-img{
-        width: 100px;
+
+.order-product-img {
+    width: 100px;
     height: 0;
     padding-bottom: 100px;
-    overflow:hidden;
+    overflow: hidden;
 }
-.order-product-img img{
-    width:100%;
+
+.order-product-img img {
+    width: 100%;
 }
-.cart-table{
-    width:100%;
+
+.cart-table {
+    width: 100%;
     font-size: 13px;
 }
 
@@ -273,28 +333,207 @@ footer{
     background: rgba(53, 53, 53, 0.05);
     line-height: 30px;
 }
+
 .cart-table tr:first-child {
     text-transform: uppercase;
     font-size: 13px;
     font-family: ProximaBold;
     line-height: 30px;
 }
-.cart-table tr td:first-child{
-    width:100px;
-    padding:0;
+
+.cart-table tr td:first-child {
+    width: 100px;
+    padding: 0;
 }
+
 .cart-table tr td:last-child {
-    width:100px;
-    text-align:center;
+    width: 100px;
+    text-align: center;
 }
-.cart-table td.num-cell{
-    width:100px;
-    text-align:right;
+
+.cart-table td.num-cell {
+    width: 100px;
+    text-align: right;
 }
-.cart-table .link{
+
+.cart-table .link {
     font-size: 17px;
     text-transform: none;
 }
-.product-sort a{
+
+.product-sort a {
     margin: 0 1px;
+}
+
+.write-comment {
+    margin-top: 270px;
+}
+
+.write-comment form label {
+    line-height: 15px;
+    clear: both;
+    padding: 10px 0;
+    color: #2b2d42;
+    font-family: ProximaBold;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    float: left;
+}
+
+.write-comment form textarea {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    background: none;
+    padding: 2px 2px 1px;
+    border-width: 0 0 1px;
+    height: 80px;
+    box-sizing: border-box;
+    color: black;
+    border-color: rgba(217, 4, 41, 0.21);
+}
+
+.write-comment form textarea:focus {
+    outline: none;
+    padding-bottom: 0;
+    border-width: 0 0 2px;
+    border-color: #d90429;
+}
+
+.write-comment form input {
+    display: inline-block;
+    float: left;
+    margin: 15px 0px;
+}
+
+.product-comments {
+    margin-top: 30px;
+}
+
+.product-comment {
+    margin: 10px 0 30px 0;
+}
+
+.product-comment p:nth-child(1) {
+    display: inline-block;
+    float: left;
+    line-height: 15px;
+    font-size: 13px;
+}
+
+.product-comment p:nth-child(2) {
+    display: inline-block;
+    float: left;
+    line-height: 15px;
+    color: #2b2d42;
+    font-family: ProximaBold;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.product-comment p:nth-child(3) {
+    display: inline-block;
+    width: 100%;
+    line-height: 15px;
+    text-align: justify;
+    margin: 0;
+}
+
+.comments-title h2 {
+    line-height: 30px;
+    text-align: left;
+    padding-left: 50px;
+    margin: 0;
+}
+
+.search_bar {
+    display: inline-block;
+    float: right;
+}
+
+.search_bar p {
+    display: inline-block;
+    margin: 0;
+    float: left;
+}
+
+.search_bar input[type="submit"] {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.search_bar p input[type="text"] {
+    background: none;
+    font-size: 16px;
+    border-width: 0 0 1px;
+    height: 40px;
+    box-sizing: border-box;
+    color: black;
+    border-color: rgba(43, 45, 66, 0.28);
+    width: 300px;
+}
+
+.search_bar p input[type="text"]:focus {
+    outline: none;
+    padding-bottom: 0;
+    border-width: 0 0 2px;
+    border-color: rgba(43, 45, 66, 0.28);
+}
+
+.product-sort {
+    width: 100%;
+    text-align: center;
+}
+
+.product-sort a {
+    float: left;
+}
+.login-form{
+        width: 400px;
+    display: inline-block;
+    padding: 50px;
+    height: 400px;
+        background: #edf2f4;
+}
+.login-form table{
+    width:100%;
+}
+.login-form table td input[type="text"]{
+    width:100%;
+}
+.login-form table td input[type="text"],.login-form table td input[type="password"] {
+    background: none;
+    font-size: 16px;
+    border-width: 0 0 1px;
+    height: 40px;
+    box-sizing: border-box;
+    color: black;
+    border-color: rgba(43, 45, 66, 0.28);
+    width: 300px;
+}
+
+.login-form table td input[type="text"]:focus, .login-form table td input[type="password"]:focus {
+    outline: none;
+    padding-bottom: 0;
+    border-width: 0 0 2px;
+    border-color: rgba(43, 45, 66, 0.28);
+}
+
+.login-form table td label{
+   font-size: 13px;
+    font-family: proximaBold;
+    text-transform: uppercase;
+}
+
+.login-form table td{
+        padding: 10px 0;
+}
+.login-title h2{
+    line-height:30px;
+    margin-top:40px;
+}
+.login-form input.button-positive{
+    margin-top:40px;
 }

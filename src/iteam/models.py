@@ -121,6 +121,8 @@ class Image(models.Model):
     source = models.ImageField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
+    def __str__(self):  # __str__ for Python 3, __unicode__ for Python 2
+        return self.product.productName + " - " + self.source.name
 
 class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

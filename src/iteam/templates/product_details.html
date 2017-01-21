@@ -49,7 +49,7 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     {{ form_comment.as_p }}
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" value="Submit" class="button-positive"/>
                 </form>
             </div>
         {% else %}
@@ -60,11 +60,12 @@
     </div>
     <div class="product-comments">
         {% if comments %}
+            <div class="comments-title"><h2>Comments</h2></div>
             {% for comment in comments %}
-                <div class="comment">
+                <div class="product-comment">
+                    <p>{{ comment.date }} - </p>
+                    <p>&nbsp;{{ comment.author.firstName }} {{ comment.author.lastName }}:</p>
                     <p>{{ comment.text }}</p>
-                    <p>{{ comment.date }}</p>
-                    <p>by {{ comment.author.firstName }} {{ comment.author.lastName }}</p>
                 </div>
             {% endfor %}
         {% else %}

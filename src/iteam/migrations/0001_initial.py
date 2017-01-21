@@ -14,10 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, verbose_name='last login', null=True)),
-                ('email', models.EmailField(unique=True, db_index=True, max_length=255)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('password', models.CharField(verbose_name='password', max_length=128)),
+                ('last_login', models.DateTimeField(verbose_name='last login', blank=True, null=True)),
+                ('email', models.EmailField(unique=True, max_length=255, db_index=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_admin', models.BooleanField(default=False)),
                 ('firstName', models.CharField(max_length=200)),
@@ -31,30 +31,52 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='Comment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('text', models.CharField(max_length=500)),
+                ('date', models.DateField()),
+                ('author', models.ForeignKey(to='iteam.User')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Image',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('source', models.ImageField(upload_to='')),
+            ],
+        ),
+        migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('quantity', models.IntegerField(default=1)),
             ],
         ),
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('productName', models.CharField(max_length=50)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('quantity', models.IntegerField(default=0)),
+                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=1)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('imageSource1', models.ImageField(blank=True, null=True, upload_to='')),
-                ('imageSource2', models.ImageField(blank=True, null=True, upload_to='')),
-                ('imageSource3', models.ImageField(blank=True, null=True, upload_to='')),
             ],
         ),
         migrations.CreateModel(
             name='ShoppingCart',
             fields=[
-                ('user', models.OneToOneField(primary_key=True, to='iteam.User', serialize=False, related_name='cart')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('date', models.DateField(blank=True, null=True)),
+                ('products', models.ManyToManyField(through='iteam.Order', to='iteam.Product')),
+                ('user', models.ForeignKey(to='iteam.User', related_name='cart')),
             ],
+        ),
+        migrations.AddField(
+            model_name='order',
+            name='cart',
+            field=models.ForeignKey(to='iteam.ShoppingCart'),
         ),
         migrations.AddField(
             model_name='order',
@@ -62,13 +84,13 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='iteam.Product'),
         ),
         migrations.AddField(
-            model_name='shoppingcart',
-            name='products',
-            field=models.ManyToManyField(through='iteam.Order', to='iteam.Product'),
+            model_name='image',
+            name='product',
+            field=models.ForeignKey(to='iteam.Product'),
         ),
         migrations.AddField(
-            model_name='order',
-            name='cart',
-            field=models.ForeignKey(to='iteam.ShoppingCart'),
+            model_name='comment',
+            name='product',
+            field=models.ForeignKey(to='iteam.Product'),
         ),
     ]
