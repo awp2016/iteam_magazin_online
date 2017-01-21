@@ -9,7 +9,13 @@
     <div class="product-details-container">
         <div class="product-name">
             <p>{{ product.productName }}</p>
-            <a class="button-positive" href="{% url 'add_item' user.cart.pk product.pk %}">
+            <a class="button-positive" href="
+            {% if user.is_authenticated %}
+            {% url 'add_item' user.get_shopping_active.pk product.pk %}
+            {% else %}
+
+            {% endif %}
+            ">
                 Add to Cart
             </a>
         </div>
@@ -38,7 +44,33 @@
                 </div>
             {% endfor %}
         </div>
+        {% if user.is_authenticated %}
+            <div class="write-comment">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form_comment.as_p }}
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        {% else %}
+            <div class="write-comment">
+                <p>You need to login to comment</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="product-comments">
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <p>{{ comment.text }}</p>
+                    <p>{{ comment.date }}</p>
+                    <p>by {{ comment.author.firstName }} {{ comment.author.lastName }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
 
+        {% endif %}
+    </div>
     </div>
 
 {% endblock %}
