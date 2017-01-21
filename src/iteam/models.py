@@ -93,21 +93,21 @@ class User(AbstractBaseUser):
 
 
 class Product(models.Model):
+    PRODUCT_GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female')
+    )
     productName = models.CharField(max_length=50)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     quantity = models.IntegerField(default=0)
+    gender = models.CharField(max_length=1, choices=PRODUCT_GENDER)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    imageSource = models.ImageField()
+    imagesource1 = models.ImageField(null=True, blank=True)
+    imagesource2 = models.ImageField(null=True, blank=True)
+    imagesource3 = models.ImageField(null=True, blank=True)
 
     def __str__(self):  # __str__ for Python 3, __unicode__ for Python 2
         return self.productName
-
-    def new_product(self, name):
-        product = self.model(
-            productName=name
-        )
-        product.save(using=self._db)
-        return product
 
     def get_absolute_url(self):
         return reverse('product_details',

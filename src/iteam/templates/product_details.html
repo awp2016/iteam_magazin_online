@@ -1,19 +1,52 @@
 {% extends './layout.html' %}
 
-{% block head %}
-    <h1>Product details</h1>
-{% endblock %}
 
 {% block content %}
 
+    <div class="product-image-container">
+        <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
+    </div>
     <div class="product-details-container">
         <div class="product-name">
-            {{ product.productName }}
+            <p>{{ product.productName }}</p>
+            <a class="button-positive" href="{% url 'add_item' user.cart.pk product.pk %}">
+                Add to Cart
+            </a>
         </div>
-        {% for review in reviews %}
-            <p>review.text</p>
-            <p>by review.author.firstName at review.date</p>
-        {% endfor %}
+        <div class="product-detail">
+            <span>Description</span><br>
+            {% if product.description != "" %}
+                {{ product.description }}
+            {% else %}
+                -
+            {% endif %}
+        </div>
+        <div class="product-detail">
+            <span>Gender</span><br>
+            {{ product.gender }}
+        </div>
+        <div class="product-detail">
+            <span>Price</span><br>
+            {{ product.price }} $
+        </div>
+        <div class="product-detail" style="margin: 0 -1.6%;">
+            <div class="product-img">
+                <a href="{{ BASE_URL }}/media/{{ product.imagesource1 }}">
+                    <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
+                </a>
+            </div>
+            <div class="product-img">
+                <a href="{{ BASE_URL }}/media/{{ product.imagesource2 }}">
+                <img src="{{ BASE_URL }}/media/{{ product.imagesource2 }}"/>
+                </a>
+            </div>
+            <div class="product-img">
+                <a href="{{ BASE_URL }}/media/{{ product.imagesource3 }}">
+                <img src="{{ BASE_URL }}/media/{{ product.imagesource3 }}"/>
+                </a>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
