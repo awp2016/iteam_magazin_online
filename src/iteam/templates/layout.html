@@ -19,8 +19,9 @@
                         cart &nbsp;&nbsp;&nbsp;<span>{{ user.get_shopping_active.getNrOrders }}</span></a>
                     <a class="button-positive cart-button" href="{% url 'shopping_history' user.pk %}">View
                          history </a>
-                    <a class="button-negative" href="{{ BASE_URL }}/logout"> Log out </a>
+                    <a class="button-negative" href="{{ BASE_URL }}/logout" style=" margin: 0 4px;"> Log out </a>
                 {% else %}
+                     <a class="button-negative login-button" href="{{ BASE_URL }}/register"> Sign Up </a>
                     <a class="button-negative login-button" href="{{ BASE_URL }}/login"> Log in </a>
                 {% endif %}
             </div>

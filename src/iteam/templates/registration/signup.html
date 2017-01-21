@@ -1,5 +1,16 @@
-        <form action='' method="POST">
+
+{% extends './layout.html' %}
+
+{% block content %}
+
+        <form class="signup-form" action='' method="POST">
+            <div class="login-title">
+              <h2>Sign Up</h2>
+           </div>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Sign Up">
         </form>
+
+{% endblock %}
+

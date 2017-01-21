@@ -35,7 +35,7 @@ body {
     cursor: pointer;
 }
 
-.button-positive {
+.button-positive, .signup-form input[type="submit"] {
     background: none;
     border: 1px solid rgba(43, 45, 66, 0.28);
     padding: 10px 22px;
@@ -49,13 +49,13 @@ body {
     line-height: 18px;
 }
 
-.button-positive:hover {
+.button-positive:hover, .signup-form input[type="submit"]:hover {
     background: #2b2d42;
     color: #FDFFFC;
     cursor: pointer;
 }
 
-.button-positive:focus {
+.button-positive:focus, .signup-form input[type="submit"]:focus {
     outline: none;
 }
 
@@ -536,4 +536,48 @@ footer {
 }
 .login-form input.button-positive{
     margin-top:40px;
+}
+
+
+
+.signup-form{
+        width: 400px;
+    display: inline-block;
+    padding: 50px;
+    height: 400px;
+        background: #edf2f4;
+  text-align:left;
+}
+.signup-form p{
+      line-height: 30px;
+    margin: 15px 0;
+}
+.signup-form input[type="text"]{
+    width:100%;
+}
+.signup-form input[type="text"],.signup-form input[type="password"],.signup-form input[type="email"] {
+    background: none;
+    font-size: 16px;
+    border-width: 0 0 1px;
+    height: 40px;
+    box-sizing: border-box;
+    color: black;
+    border-color: rgba(43, 45, 66, 0.28);
+width: 100%;
+
+}
+.signup-form .helptext{
+        display: none;
+}
+.signup-form input[type="text"]:focus, .signup-form input[type="password"]:focus, .signup-form input[type="email"]:focus {
+    outline: none;
+    padding-bottom: 0;
+    border-width: 0 0 2px;
+    border-color: rgba(43, 45, 66, 0.28);
+}
+
+.signup-form label{
+   font-size: 13px;
+    font-family: proximaBold;
+    text-transform: uppercase;
 }
