@@ -1,6 +1,5 @@
-from django.db import models
+from ckeditor.fields import RichTextField
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -24,7 +23,7 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        ShoppingCart.objects.create(user = user)
+        ShoppingCart.objects.create(user=user)
         return user
 
     def create_superuser(self, email, password):
@@ -93,7 +92,6 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = 'users'
-
 
 
 class Product(models.Model):
