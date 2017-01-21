@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
+        ShoppingCart.objects.create(user = user)
         return user
 
     def create_superuser(self, email, password):
@@ -89,9 +90,9 @@ class User(AbstractBaseUser):
     def username(self):
         return self.email
 
-
     class Meta:
         db_table = 'users'
+
 
 
 class Product(models.Model):
@@ -117,8 +118,8 @@ class Product(models.Model):
 
 
 class ShoppingCart(models.Model):
-	user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cart')
-	products = models.ManyToManyField(Product, through='Order')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart')
+    products = models.ManyToManyField(Product, through='Order')
 
 
 class Order(models.Model):
