@@ -25,6 +25,7 @@ ALLOWED_HOSTS = [
 ]
 
 AUTH_USER_MODEL = 'iteam.User'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
