@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
@@ -21,6 +22,7 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
+        ShoppingCart.objects.create(user = user)
         return user
 
     def create_superuser(self, email, password):
@@ -91,6 +93,7 @@ class User(AbstractBaseUser):
         db_table = 'users'
 
 
+
 class Product(models.Model):
     PRODUCT_GENDER = (
         ('M', 'Male'),
@@ -114,12 +117,12 @@ class Product(models.Model):
 
 
 class ShoppingCart(models.Model):
-    user = models.OneToOneField(User, primary_key=True, related_name='cart')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart')
     products = models.ManyToManyField(Product, through='Order')
+
 
     def getNrOrders(self):
         return len(Order.objects.filter(cart=self))
-
 
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
