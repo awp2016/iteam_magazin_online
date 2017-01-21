@@ -22,7 +22,7 @@
             <div class="product-details">
                     <a href="{% url 'product_details' tup.0.pk %}" class="product-title">{{ tup.0.productName }}</a>
 
-                    <a class="button-negative product-buy" href="{% url 'add_item' user.cart.pk tup.0.pk %}">
+                <a class="button-negative product-buy" href="{% url 'add_item' user.get_shopping_active.pk tup.0.pk %}">
     		            Buy / {{ tup.0.price }} $
  			        </a>
              </div>
@@ -32,4 +32,3 @@
 
 
 {% endblock %}
-

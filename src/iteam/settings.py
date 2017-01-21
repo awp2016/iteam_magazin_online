@@ -1,6 +1,6 @@
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -16,18 +16,15 @@ if ITEAM_PLATFORM == 'LOCAL':
 else:
     DEBUG = False
 
-
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [
-        'localhost',
-        '127.0.0.1',
-        'iteam.xlocal',
-    ]
+    'localhost',
+    '127.0.0.1',
+    'iteam.xlocal',
+]
 
 AUTH_USER_MODEL = 'iteam.User'
-
-
 
 # Application definition
 
@@ -42,8 +39,9 @@ INSTALLED_APPS = (
     'django_extensions',
     'compressor',
     'ckeditor',
-    #internal app
+    # internal app
     'iteam',
+    'django.contrib.auth'
 )
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
@@ -64,19 +62,20 @@ ROOT_URLCONF = 'iteam.urls'
 
 WSGI_APPLICATION = 'iteam.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'magazin_online',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'magazin_online',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'iteamdev',
         'PASSWORD': 'dragos',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': 'localhost',
+    # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
 
@@ -84,8 +83,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en'
-
-
 
 TIME_ZONE = 'EET'
 
@@ -95,28 +92,27 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
-    #other
+    # other
     'compressor.finders.CompressorFinder',
 )
 
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
-    #creates absolute urls from relative ones
+    # creates absolute urls from relative ones
     'compressor.filters.css_default.CssAbsoluteFilter',
-    #css minimizer
+    # css minimizer
     'compressor.filters.cssmin.CSSMinFilter'
 ]
 TEMPLATE_CONTEXT_PROCESSORS = (
