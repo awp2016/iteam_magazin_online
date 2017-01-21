@@ -20,6 +20,8 @@
                     <a class="button-negative" href="{{ BASE_URL }}/logout"> Log out </a>
                     {% else %}
                     <a class="button-negative login-button" href="{{ BASE_URL }}/login"> Log in </a>
+                    <a class="button-positive cart-button" href="{% url 'shopping_history' user.pk %}">View
+                         history </a>
                 {% endif %}
             </div>
         {% endblock %}
