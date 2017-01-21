@@ -11,6 +11,13 @@
     <a class="button-negative" href="{{ BASE_URL }}/">
             All
      </a>
+    <div class="search_bar">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form_search.as_p }}
+                <input class="button-positive" type="submit" value="Search"/>
+            </form>
+        </div>
 </div>
 
 <div class="products-container">
@@ -31,6 +38,5 @@
         </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}
