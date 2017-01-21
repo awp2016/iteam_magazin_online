@@ -10,7 +10,6 @@ from iteam.models import Order
 from iteam.models import Product
 from iteam.models import ShoppingCart
 from . import models
-import datetime
 
 
 class ProductsListView(ListView):
@@ -88,14 +87,16 @@ def shopping_cart(request, pk):
     }
     return render(request, 'view_shopping_cart.html', context)
 
+
 def shopping_history(request, pk):
     user = models.User.objects.get(pk=pk)
-    carts = models.ShoppingCart.objects.filter(user=user,date__isnull=False)
+    carts = models.ShoppingCart.objects.filter(user=user, date__isnull=False)
     context = {
         'carts': carts,
         'user': user
     }
     return render(request, 'view_shopping_history.html', context)
+
 
 def place_order(request, pk):
     cart = models.ShoppingCart.objects.get(pk=pk)
@@ -114,14 +115,16 @@ def place_order(request, pk):
     }
     return render(request, 'view_shopping_cart.html', context)
 
+
 def shopping_history(request, pk):
     user = models.User.objects.get(pk=pk)
-    carts = models.ShoppingCart.objects.filter(user=user,date__isnull=False)
+    carts = models.ShoppingCart.objects.filter(user=user, date__isnull=False)
     context = {
         'carts': carts,
         'user': user
     }
     return render(request, 'view_shopping_history.html', context)
+
 
 def place_order(request, pk):
     cart = models.ShoppingCart.objects.get(pk=pk)
@@ -169,7 +172,7 @@ def add_item(request, pk_cart, pk_produs):
     cart = ShoppingCart.objects.get(pk=pk_cart)
     product = Product.objects.get(pk=pk_produs)
     try:
-        check_order = Order.objects.get(product=product,cart=cart)
+        check_order = Order.objects.get(product=product, cart=cart)
     except Exception:
         order = Order(cart=cart, product=product, quantity=1)
         order.save()
