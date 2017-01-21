@@ -12,6 +12,7 @@
             All
      </a>
 </div>
+
 <div class="products-container">
     {% for tup in tuplu %}
         <div class="product-container">
@@ -21,10 +22,11 @@
 
             <div class="product-details">
                     <a href="{% url 'product_details' tup.0.pk %}" class="product-title">{{ tup.0.productName }}</a>
-
+                {% if user.is_authenticated %}
                 <a class="button-negative product-buy" href="{% url 'add_item' user.get_shopping_active.pk tup.0.pk %}">
     		            Buy / {{ tup.0.price }} $
  			        </a>
+                {% endif %}
              </div>
         </div>
     {% endfor %}
