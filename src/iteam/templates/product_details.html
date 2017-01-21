@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="product-image-container">
-        <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
+        <img src="{{ BASE_URL }}/media/{{ images.first.source }}"/>
     </div>
     <div class="product-details-container">
         <div class="product-name">
@@ -30,21 +30,13 @@
             {{ product.price }} $
         </div>
         <div class="product-detail" style="margin: 0 -1.6%;">
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource1 }}">
-                    <img src="{{ BASE_URL }}/media/{{ product.imagesource1 }}"/>
-                </a>
-            </div>
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource2 }}">
-                <img src="{{ BASE_URL }}/media/{{ product.imagesource2 }}"/>
-                </a>
-            </div>
-            <div class="product-img">
-                <a href="{{ BASE_URL }}/media/{{ product.imagesource3 }}">
-                <img src="{{ BASE_URL }}/media/{{ product.imagesource3 }}"/>
-                </a>
-            </div>
+            {% for image in images %}
+                <div class="product-img">
+                    <a href="{{ BASE_URL }}/media/{{ image.source }}">
+                        <img src="{{ BASE_URL }}/media/{{ image.source }}"/>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
 
     </div>

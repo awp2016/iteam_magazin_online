@@ -103,9 +103,6 @@ class Product(models.Model):
     quantity = models.IntegerField(default=0)
     gender = models.CharField(max_length=1, choices=PRODUCT_GENDER)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    imagesource1 = models.ImageField(null=True, blank=True)
-    imagesource2 = models.ImageField(null=True, blank=True)
-    imagesource3 = models.ImageField(null=True, blank=True)
 
     def __str__(self):  # __str__ for Python 3, __unicode__ for Python 2
         return self.productName
@@ -114,6 +111,9 @@ class Product(models.Model):
         return reverse('product_details',
                        kwargs={'pk': self.pk})
 
+class Image(models.Model):
+    source = models.ImageField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 class ShoppingCart(models.Model):
 	user = models.OneToOneField(User,primary_key=True, related_name='cart')

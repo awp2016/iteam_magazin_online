@@ -12,21 +12,21 @@
         <td class="num-cell">Price</td>
         <td></td>
     </tr>
-{% if orders %}
-    {% for order in orders %}
+{% if tuplu %}
+    {% for tup in tuplu %}
 	<tr>
         <td>
             <div class="order-product-img">
-                <img src="{{ BASE_URL }}/media/{{ order.product.imagesource1 }}"/>
+                <img src="{{ BASE_URL }}/media/{{ tup.1.source }}"/>
             </div>
         </td>
 		<td>
-            <a class="link" href="{% url 'product_details' order.product.pk %}" class="product-title">{{ order.product.productName }}</a>
+            <a class="link" href="{% url 'product_details' tup.0.product.pk %}" class="product-title">{{ tup.0.product.productName }}</a>
         </td>
-		<td class="num-cell">{{order.quantity}}</td>
-        <td class="num-cell">{% widthratio order.quantity 1 order.product.price %}</td>
+		<td class="num-cell">{{tup.0.quantity}}</td>
+        <td class="num-cell">{% widthratio tup.0.quantity 1 tup.0.product.price %}</td>
 		<td>
-            <a href="{% url 'remove_item' order.pk %}" class="link-del">Remove item</a>
+            <a href="{% url 'remove_item' tup.0.pk %}" class="link-del">Remove item</a>
         </td>
 	</tr>
     {% endfor %}
