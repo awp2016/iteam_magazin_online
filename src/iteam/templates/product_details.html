@@ -13,7 +13,7 @@
             {% if user.is_authenticated %}
             {% url 'add_item' user.get_shopping_active.pk product.pk %}
             {% else %}
-
+            {% url 'login' %}
             {% endif %}
             ">
                 Add to Cart
