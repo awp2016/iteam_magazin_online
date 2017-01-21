@@ -8,7 +8,7 @@ class CommentForm(forms.Form):
 
 
 class SearchForm(forms.Form):
-    text = forms.CharField(label="", widget=forms.TextInput, required=True, max_length=50)
+    text = forms.CharField(label="", widget=forms.TextInput, required=False, max_length=50)
 
 
 class UserCreationCustomForm(UserCreationForm):
