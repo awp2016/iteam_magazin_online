@@ -18,7 +18,7 @@
                     <a class="button-positive cart-button" href="{% url 'shopping_cart' user.get_shopping_active.pk %}">View
                         cart &nbsp;&nbsp;&nbsp;<span>{{ user.get_shopping_active.getNrOrders }}</span></a>
                     <a class="button-positive cart-button" href="{% url 'shopping_history' user.pk %}">View
- +                        history </a>
+                         history </a>
                 {% endif %}
             </div>
         {% endblock %}

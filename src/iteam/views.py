@@ -88,6 +88,31 @@ def shopping_cart(request, pk):
     }
     return render(request, 'view_shopping_cart.html', context)
 
+def shopping_history(request, pk):
+    user = models.User.objects.get(pk=pk)
+    carts = models.ShoppingCart.objects.filter(user=user,date__isnull=False)
+    context = {
+        'carts': carts,
+        'user': user
+    }
+    return render(request, 'view_shopping_history.html', context)
+
+def place_order(request, pk):
+    cart = models.ShoppingCart.objects.get(pk=pk)
+    orders = models.Order.objects.filter(cart=cart)
+    for order in orders:
+        order.product.quantity -= order.quantity
+        order.product.save()
+    cart.date = datetime.datetime.now()
+    cart.save()
+    new_cart = models.ShoppingCart(user=cart.user)
+    new_cart.save()
+    user = new_cart.user
+    context = {
+        'cart': new_cart,
+        'user': user
+    }
+    return render(request, 'view_shopping_cart.html', context)
 
 def shopping_history(request, pk):
     user = models.User.objects.get(pk=pk)
