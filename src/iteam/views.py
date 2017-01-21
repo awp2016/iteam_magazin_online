@@ -25,15 +25,31 @@ class ProductsListView(ListView):
     def get_queryset(self):
         return self.model.objects.order_by('-price')
 
+def index(request, gender = None):
+    if gender is None:
+        products = models.Product.objects.all()
+    else:
+        products = models.Product.objects.filter(gender=gender)
+    tup = []
+    for prod in products:
+        image = models.Image.objects.filter(product=prod).first
+        tuplu = (prod, image)
+        tup.append(tuplu)
+    context = {
+        'tuplu': tup
+    }
+    return render(request, 'index.html', context)
 
 def product_details(request, pk):
     form_comment = forms.CommentForm()
     product = Product.objects.get(pk=pk)
     comments = Comment.objects.filter(product=product).order_by('-date')
+    images = models.Image.objects.filter(product=product)
     context = {
         'product': product,
         'comments': comments,
         'form_comment': form_comment
+        'images': images
     }
     if request.method == 'POST':
         form = forms.CommentForm(request.POST)
@@ -49,11 +65,16 @@ def product_details(request, pk):
 def shopping_cart(request, pk):
     cart = ShoppingCart.objects.get(pk=pk)
     user = cart.user
-    orders = Order.objects.filter(cart=cart)
+    orders = models.Order.objects.filter(cart=cart)
+    tup = []
+    for ord in orders:
+        image = models.Image.objects.filter(product=ord.product).first
+        tuplu = (ord, image)
+        tup.append(tuplu)
     context = {
         'cart': cart,
         'user': user,
-        'orders': orders
+        'tuplu': tup
     }
     return render(request, 'view_shopping_cart.html', context)
 
@@ -89,11 +110,16 @@ def add_item(request, pk_cart, pk_produs):
         check_order.quantity += 1
         check_order.save()
     orders = models.Order.objects.filter(cart=cart)
+    tup = []
+    for ord in orders:
+        image = models.Image.objects.filter(product=ord.product).first
+        tuplu = (ord, image)
+        tup.append(tuplu)
     user = cart.user
     context = {
         'cart': cart,
         'user': user,
-        'orders': orders
+     'tuplu': tup
     }
     return render(request, 'view_shopping_cart.html', context)
 

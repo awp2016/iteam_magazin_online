@@ -1,26 +1,35 @@
 {% extends './layout.html' %}
 
 {% block content %}
-    <div class="product-sort">
+<div class="product-sort">
+     <a class="button-negative" href="{% url 'index' 'M' %}">
+            Male
+     </a>
+    <a class="button-negative" href="{% url 'index' 'F' %}">
+            Female
+     </a>
+    <a class="button-negative" href="{{ BASE_URL }}/">
+            All
+     </a>
+</div>
+<div class="products-container">
+    {% for tup in tuplu %}
+        <div class="product-container">
+            <a href="{% url 'product_details' tup.0.pk %}">
+                <img src="media/{{ tup.1.source }}"/>
+            </a>
 
-    </div>
-    <div class="products-container">
-        {% for product in product_list %}
-            <div class="product-container">
-                <a href="{% url 'product_details' product.pk %}">
-                    <img src="media/{{ product.imagesource1 }}"/>
-                </a>
+            <div class="product-details">
+                    <a href="{% url 'product_details' tup.0.pk %}" class="product-title">{{ tup.0.productName }}</a>
 
-                <div class="product-details">
-                    <a href="{% url 'product_details' product.pk %}" class="product-title">{{ product.productName }}</a>
-
-                    <a class="button-negative product-buy" href="{% url 'add_item' user.cart.pk product.pk %}">
-                        Buy / {{ product.price }} $
-                    </a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+                    <a class="button-negative product-buy" href="{% url 'add_item' user.cart.pk tup.0.pk %}">
+    		            Buy / {{ tup.0.price }} $
+ 			        </a>
+             </div>
+        </div>
+    {% endfor %}
+</div>
 
 
 {% endblock %}
+
