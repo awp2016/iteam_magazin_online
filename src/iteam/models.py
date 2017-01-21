@@ -1,4 +1,6 @@
-from ckeditor.fields import RichTextField
+from django.db import models
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -122,8 +124,8 @@ class Comment(models.Model):
 
 
 class ShoppingCart(models.Model):
-    user = models.OneToOneField(User, primary_key=True, related_name='cart')
-    products = models.ManyToManyField(Product, through='Order')
+	user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cart')
+	products = models.ManyToManyField(Product, through='Order')
 
 
 class Order(models.Model):
