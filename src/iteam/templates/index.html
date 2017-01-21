@@ -1,26 +1,26 @@
 {% extends './layout.html' %}
 
 {% block content %}
+<div class="product-sort">
 
-<div class="products-container">
-	<table>
-	    {% for product in product_list %}
-	    	<tr>
-	    		<td>
-			        <a href="{% url 'product_details' product.pk %}">
-			            {{ product.productName }}
-			        </a>
-			    </td>  
-			    <td>  
-			        <a href="{% url 'add_item' user.cart.pk product.pk %}">
-			            Buy
-			        </a>
-			    </td>	    
-			</tr>    	
-	    {% endfor %}
-	</table>    
 </div>
-<div>
-	<a href="{% url 'shopping_cart' user.cart.pk %}">View cart</a>
-</div>	
+<div class="products-container">
+    {% for product in product_list %}
+        <div class="product-container">
+            <a href="{% url 'product_details' product.pk %}">
+                <img src="media/{{ product.imagesource1 }}"/>
+            </a>
+
+            <div class="product-details">
+                    <a href="{% url 'product_details' product.pk %}" class="product-title">{{ product.productName }}</a>
+
+                    <a class="button-negative product-buy" href="{% url 'add_item' user.cart.pk product.pk %}">
+    		            Buy / {{ product.price }} $
+ 			        </a>
+             </div>
+        </div>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

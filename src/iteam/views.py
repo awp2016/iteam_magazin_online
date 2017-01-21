@@ -59,8 +59,9 @@ def remove_item(request, pk):
 def add_item(request,pk_cart,pk_produs):
     cart = models.ShoppingCart.objects.get(pk=pk_cart)
     product = models.Product.objects.get(pk=pk_produs)
-    check_order = models.Order.objects.get(product=product)
-    if check_order is None:
+    try:
+        check_order = models.Order.objects.get(product=product)
+    except Exception:
         order = Order(cart=cart, product=product, quantity=1)
         order.save()
     else:

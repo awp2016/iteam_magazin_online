@@ -1,11 +1,45 @@
-<h1> Shopping cart </h1>
+{% extends './layout.html' %}
 
-<table>
-{% for order in orders %}
+{% block content %}
+
+<h2> Shopping cart </h2>
+
+<table class="cart-table">
+    <tr>
+        <td></td>
+        <td>Name</td>
+        <td class="num-cell">Quantity</td>
+        <td class="num-cell">Price</td>
+        <td></td>
+    </tr>
+{% if orders %}
+    {% for order in orders %}
 	<tr>
-		<td>Name: {{ order.product.productName }}</td>
-		<td>Quantity: {{order.quantity}}</td>
-		<td><a href="{% url 'remove_item' order.pk %}">Remove one item</a></td>
+        <td>
+            <div class="order-product-img">
+                <img src="{{ BASE_URL }}/media/{{ order.product.imagesource1 }}"/>
+            </div>
+        </td>
+		<td>
+            <a class="link" href="{% url 'product_details' order.product.pk %}" class="product-title">{{ order.product.productName }}</a>
+        </td>
+		<td class="num-cell">{{order.quantity}}</td>
+        <td class="num-cell">{% widthratio order.quantity 1 order.product.price %}</td>
+		<td>
+            <a href="{% url 'remove_item' order.pk %}" class="link-del">Remove item</a>
+        </td>
 	</tr>
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <tr>
+        <td></td>
+        <td>No products in your cart.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+{% endif %}
+
 </table>
+
+{% endblock %}

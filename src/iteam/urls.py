@@ -7,7 +7,6 @@ from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 from django.views.decorators.cache import cache_page
 
-from iteam.views import ProductsListView
 from iteam import views
 admin.autodiscover()
 
